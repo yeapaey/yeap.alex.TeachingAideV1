@@ -6,7 +6,7 @@ import java.util.UUID;
 public class Lesson {
 	
 	private UUID id; // May not be necessary if dates are unique. DATES ARE NOT UNIQUE!!!
-	private Date date;
+	private Date date; // Use this to set the actual date and time when the generator works
 	private String plan;
 	private String notes;
 	private boolean absent;

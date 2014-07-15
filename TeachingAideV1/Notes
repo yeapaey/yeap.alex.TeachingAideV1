@@ -1,10 +1,16 @@
-test test test
+
 
 Lesson needs to be made comparable.
 Something wrong with the while loop in DataEngine:38 (getTeachable) - DONE
 
 
+
 **********************************
+
+* Consider making things like id prefixes an enum
+* Abstract ID may no longer be needed 
+
+
 
 Alternate design:
 
@@ -14,3 +20,19 @@ Alternate design:
 	* Does the class hold a reference to it's lessons? Probably yes, both the student(s) and 
 	  the group link to the same lesson object.
 	* Group Class is either and extension of Indivdual Class or IC is a limited version of GC.  
+		* IC subclasses Group and overwrites addStudent() to only allow one student in the list at a time.
+		* either this or just have an attribute but getStudents() wraps it in a collection  
+
+	
+Individual:
+* Name
+* Student
+* Lessons<>
+* ID
+
+
+Group:
+* Name
+* Students<>
+* Lessons<>
+* ID

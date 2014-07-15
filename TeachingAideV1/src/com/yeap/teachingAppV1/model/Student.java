@@ -19,7 +19,7 @@ public class Student implements Teachable {
 	private String motherPhone;
 	private String fatherPhone;
 	private String email;
-	private StudentGroup group;
+	private AbstractLearningClass learningClass;
 	private TreeSet<Lesson> lessons;
 
 	
@@ -37,7 +37,7 @@ public class Student implements Teachable {
 		fatherPhone = new String();
 		email = new String();
 		lessons = new TreeSet<Lesson>();
-		group = null;
+		learningClass = null;
 	}
 
 	
@@ -157,13 +157,13 @@ public class Student implements Teachable {
 	}
 
 
-	public StudentGroup getGroup() {
-		return group;
+	public AbstractLearningClass getLearningClass() {
+		return learningClass;
 	}
 
 
-	public void setGroup(StudentGroup group) {
-		this.group = group;
+	public void setLearningClass(AbstractLearningClass learningClass) {
+		this.learningClass = learningClass;
 	}
 
 
