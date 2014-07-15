@@ -2,3 +2,15 @@ test test test
 
 Lesson needs to be made comparable.
 Something wrong with the while loop in DataEngine:38 (getTeachable) - DONE
+
+
+**********************************
+
+Alternate design:
+
+* Create students, then have "Individual Class" and "Group Class". 
+	* For a student to receive (new) lessons they must belong to one of these classes.
+	* The student holds the master copy of all its lessons
+	* Does the class hold a reference to it's lessons? Probably yes, both the student(s) and 
+	  the group link to the same lesson object.
+	* Group Class is either and extension of Indivdual Class or IC is a limited version of GC.  

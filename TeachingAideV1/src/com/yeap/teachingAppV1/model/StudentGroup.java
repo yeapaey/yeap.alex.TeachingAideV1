@@ -6,6 +6,9 @@ import java.util.SortedMap;
 import java.util.TreeSet;
 import java.util.TreeSet;
 
+import com.yeap.teachingAppV1.model.uniqueID.AbstractUniqueID;
+import com.yeap.teachingAppV1.model.uniqueID.StudentGroupID;
+
 public class StudentGroup implements Teachable {
 
 	private StudentGroupID id;

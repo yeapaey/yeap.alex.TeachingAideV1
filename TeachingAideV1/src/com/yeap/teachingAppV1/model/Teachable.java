@@ -2,6 +2,8 @@ package com.yeap.teachingAppV1.model;
 
 import java.util.SortedSet;
 
+import com.yeap.teachingAppV1.model.uniqueID.AbstractUniqueID;
+
 public interface Teachable extends Comparable<Teachable>{
 
 	public void addLesson(Lesson newLesson);
