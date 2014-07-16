@@ -1,14 +1,13 @@
 package com.yeap.teachingAppV1.model;
 
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.LinkedList;
 
-import com.yeap.teachingAppV1.model.uniqueID.AbstractUniqueID;
+import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
 public class Student implements Teachable {
 	
-	private StudentID id;
+	private static final String idPrefix = new String("STU");
+	private UniqueID id;
 	private String surname;
 	private String firstName;
 	private String className;
@@ -20,12 +19,12 @@ public class Student implements Teachable {
 	private String fatherPhone;
 	private String email;
 	private AbstractLearningClass learningClass;
-	private TreeSet<Lesson> lessons;
+	private LinkedList<Lesson> lessons;
 
 	
 	public Student(String surname, String firstName, String className)
 	{
-		id = new StudentID();
+		id = new UniqueID(idPrefix);
 		this.surname = surname;
 		this.firstName = firstName;
 		this.className = className;
@@ -36,7 +35,7 @@ public class Student implements Teachable {
 		motherPhone = new String();
 		fatherPhone = new String();
 		email = new String();
-		lessons = new TreeSet<Lesson>();
+		lessons = new LinkedList<Lesson>();
 		learningClass = null;
 	}
 
@@ -48,7 +47,8 @@ public class Student implements Teachable {
 	}
 
 	@Override
-	public boolean removeLesson() {
+	public boolean removeLesson(UniqueID lessonID)
+	{
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -57,17 +57,16 @@ public class Student implements Teachable {
 
 	
 	@Override
-	public boolean equals(AbstractUniqueID otherID) {
+	public boolean equals(UniqueID otherID) {
 		
 		return id.equals(otherID);
 	}
 
 
-
-	
 	
 	@Override
-	public SortedSet<Lesson> getLessons() {
+	public LinkedList<Lesson> getLessons()
+	{
 		// TODO Auto-generated method stub
 		return lessons;
 	}
@@ -152,7 +151,9 @@ public class Student implements Teachable {
 		this.email = email;
 	}
 
-	public StudentID getId() {
+
+	public UniqueID getId()
+	{
 		return id;
 	}
 
@@ -167,16 +168,26 @@ public class Student implements Teachable {
 	}
 
 
-	@Override
-	public int compareTo(Teachable o) {
+	
+	public int compareTo(Student other) {
 		
-		return getComparator().compareToIgnoreCase(o.getComparator());
+		int result = surname.compareToIgnoreCase(other.getSurname());
+		
+		if (result != 0)
+		{
+			return result;
+		}
+		else
+		{
+			return firstName.compareToIgnoreCase(other.getFirstName());			
+		}
 	}
 
-	public String getComparator()
-	{
-		return surname + " " + firstName;
-	}
+
+//	public String getComparator()
+//	{
+//		return surname + " " + firstName;
+//	}
 	
 	
 	

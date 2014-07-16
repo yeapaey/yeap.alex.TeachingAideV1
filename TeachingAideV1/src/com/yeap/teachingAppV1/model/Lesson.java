@@ -1,27 +1,36 @@
 package com.yeap.teachingAppV1.model;
 
 import java.util.Date;
-import java.util.UUID;
+import java.util.HashMap;
+
+import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
 public class Lesson {
 	
-	private UUID id; // May not be necessary if dates are unique. DATES ARE NOT UNIQUE!!!
+	private static final String idPrefix = new String("L");
+	private UniqueID id; // May not be necessary if dates are unique. DATES ARE NOT UNIQUE!!!
 	private Date date; // Use this to set the actual date and time when the generator works
 	private String plan;
 	private String notes;
 	private boolean absent;
+	private HashMap<UniqueID, AbstractLearningClass> owners;
 //	private int lessonNo;
 	
 	
 	public Lesson()
 	{
-		id = UUID.randomUUID();
+		id = new UniqueID(idPrefix);
 		date = new Date();
 		plan = new String();
 		notes = new String();
 		absent = false;
 	}
 
+
+	public void addLearningClass(AbstractLearningClass newOwner)
+	{
+		owners.put(newOwner.getId(), newOwner);
+	}
 
 	public Date getDate() {
 		return date;
@@ -63,7 +72,7 @@ public class Lesson {
 	}
 
 
-	public UUID getId() {
+	public UniqueID getId() {
 		return id;
 	}
 	

@@ -54,16 +54,7 @@ public class DataEngine {
 		
 		
 		// check for nulls
-/*		if (group == null)
-		{
-			System.out.println("Group is NULL"); return;
-		}
-		if (student == null)
-		{
-			System.out.println("student is NULL"); return;
-		}
-		System.out.println(group.getComparator() + ", " + student.getComparator());
-*/
+
 		
 		group.addStudent(student);	
 		
