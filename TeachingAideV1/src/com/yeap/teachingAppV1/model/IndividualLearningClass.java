@@ -16,7 +16,7 @@ public class IndividualLearningClass extends AbstractLearningClass {
 	// student = null;
 	// }
 
-	public IndividualLearningClass(String idPrefix, String name, Student student)
+	public IndividualLearningClass(String name, Student student)
 	{
 		super(idPrefix, name, true);
 		this.student = student;
@@ -42,6 +42,7 @@ public class IndividualLearningClass extends AbstractLearningClass {
 			return wrapper;
 		}
 	}
+
+
+
 }
-
-

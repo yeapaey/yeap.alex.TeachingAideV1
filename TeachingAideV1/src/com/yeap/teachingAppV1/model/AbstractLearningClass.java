@@ -6,7 +6,7 @@ import java.util.LinkedList;
 
 import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
-abstract public class AbstractLearningClass implements Teachable
+abstract public class AbstractLearningClass implements Teachable, Comparable<AbstractLearningClass>
 {
 
 	private UniqueID id;
@@ -111,7 +111,6 @@ abstract public class AbstractLearningClass implements Teachable
 
 
 	abstract public HashMap<UniqueID, Student> getStudents();
-
 
 	public LinkedList<Lesson> getLessons()
 	{

@@ -1,16 +1,17 @@
 package com.yeap.teachingAppV1.model;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
-public class Student implements Teachable {
+public class Student implements Teachable, Comparable<Student>
+{
 	
 	private static final String idPrefix = new String("STU");
 	private UniqueID id;
 	private String surname;
 	private String firstName;
-	private String className;
 	private String mobilePhone;
 	private String homePhone;
 	private String motherName;
@@ -18,7 +19,7 @@ public class Student implements Teachable {
 	private String motherPhone;
 	private String fatherPhone;
 	private String email;
-	private AbstractLearningClass learningClass;
+	private LinkedList<AbstractLearningClass> learningClasses;
 	private LinkedList<Lesson> lessons;
 
 	
@@ -27,7 +28,6 @@ public class Student implements Teachable {
 		id = new UniqueID(idPrefix);
 		this.surname = surname;
 		this.firstName = firstName;
-		this.className = className;
 		mobilePhone = new String();
 		homePhone = new String();
 		motherName = new String();
@@ -36,7 +36,7 @@ public class Student implements Teachable {
 		fatherPhone = new String();
 		email = new String();
 		lessons = new LinkedList<Lesson>();
-		learningClass = null;
+		learningClasses = new LinkedList<AbstractLearningClass>();
 	}
 
 	
@@ -54,14 +54,34 @@ public class Student implements Teachable {
 	}
 	
 	
+	public void addLearningClass(AbstractLearningClass newLearningClass)
+	{
+		learningClasses.addFirst(newLearningClass);
+	}
 
+
+	public boolean removeLearningClass(UniqueID learningClassID)
+	{
+		Iterator<AbstractLearningClass> iter = learningClasses.iterator();
+
+		while (iter.hasNext())
+		{
+			if (iter.next().getId().equals(learningClassID))
+			{
+				iter.remove();
+				return true;
+			}
+		}
+
+		return false;
+	}
 	
+
 	@Override
 	public boolean equals(UniqueID otherID) {
 		
 		return id.equals(otherID);
 	}
-
 
 	
 	@Override
@@ -87,13 +107,6 @@ public class Student implements Teachable {
 		this.firstName = firstName;
 	}
 
-	public String getClassName() {
-		return className;
-	}
-
-	public void setClassName(String className) {
-		this.className = className;
-	}
 
 	public String getMobilePhone() {
 		return mobilePhone;
@@ -158,16 +171,25 @@ public class Student implements Teachable {
 	}
 
 
-	public AbstractLearningClass getLearningClass() {
-		return learningClass;
+	public LinkedList<AbstractLearningClass> getLearningClasses()
+	{
+		return learningClasses;
 	}
 
 
-	public void setLearningClass(AbstractLearningClass learningClass) {
-		this.learningClass = learningClass;
-	}
 
 
+
+	// public boolean clearLearningClassReferences()
+	// {
+	// for (AbstractLearningClass alc : learningClasses)
+	// {
+	// alc
+	// }
+	// }
+	//
+	// return false;
+	// }
 	
 	public int compareTo(Student other) {
 		
