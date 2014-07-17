@@ -1,6 +1,6 @@
 package com.yeap.teachingAppV1.model;
 
-import java.util.HashMap;
+import java.util.LinkedList;
 
 import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
@@ -28,7 +28,7 @@ public class IndividualLearningClass extends AbstractLearningClass {
 
 
 	@Override
-	public HashMap<UniqueID, Student> getStudents()
+	public LinkedList<Student> getStudents()
 	{
 		if (student == null)
 		{
@@ -36,13 +36,33 @@ public class IndividualLearningClass extends AbstractLearningClass {
 		}
 		else
 		{
-			HashMap<UniqueID, Student> wrapper = new HashMap<UniqueID, Student>();
-			wrapper.put(student.getId(), student);
+			LinkedList<Student> wrapper = new LinkedList<Student>();
+			wrapper.add(student);
 
 			return wrapper;
 		}
 	}
 
+
+	@Override
+	public void addStudent(Student student)
+	{
+		if (student == null)
+		{
+			this.student = student;
+		}
+
+		// else throw some sort of exception to indicate it can't be changed
+
+	}
+
+
+	@Override
+	public boolean removeStudent(UniqueID studentID)
+	{
+		student = null;
+		return true;
+	}
 
 
 }

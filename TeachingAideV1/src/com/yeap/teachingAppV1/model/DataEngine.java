@@ -89,6 +89,59 @@ public class DataEngine
 		return false;
 	}
 
+
+	// returns boolean because it requires finding by ID. If student object was passed, could change to void.
+	public boolean addStudentToLearningClass(UniqueID groupID, UniqueID studentID)
+	{
+		AbstractLearningClass lc = getLearningClassByID(groupID);
+		
+		if (lc != null)
+		{
+			Student s = getStudentByID(studentID);
+			lc.addStudent(s);
+			return true;
+		}
+
+		return false;
+	}
+
+
+	public AbstractLearningClass getLearningClassByID(UniqueID learningClassID)
+	{
+		Iterator<AbstractLearningClass> iter = allLearningClasses.iterator();
+		AbstractLearningClass current = null;
+
+		while (iter.hasNext())
+		{
+			current = iter.next();
+			if (current.equals(learningClassID))
+			{
+				return current;
+			}
+		}
+
+		return null;
+	}
+
+
+	public Student getStudentByID(UniqueID studentID)
+	{
+		Student current;
+		Iterator<Student> iter = allStudents.iterator();
+
+		while (iter.hasNext())
+		{
+			current = iter.next();
+			if (current.equals(studentID))
+			{
+				return current;
+			}
+		}
+
+		return null;
+	}
+
+
 	// public void addTeachable(Teachable newTeachable)
 	// {
 	// allTeachable.add(newTeachable);

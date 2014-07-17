@@ -1,6 +1,5 @@
 package com.yeap.teachingAppV1.model;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -110,7 +109,14 @@ abstract public class AbstractLearningClass implements Teachable, Comparable<Abs
 	}
 
 
-	abstract public HashMap<UniqueID, Student> getStudents();
+	abstract public LinkedList<Student> getStudents();
+	
+
+	abstract public void addStudent(Student student);
+	
+
+	abstract public boolean removeStudent(UniqueID studentID);
+	
 
 	public LinkedList<Lesson> getLessons()
 	{
@@ -118,3 +124,14 @@ abstract public class AbstractLearningClass implements Teachable, Comparable<Abs
 	}
 
 }
+
+/*
+ * TESTS
+ * 
+ * add lesson - also add to related students??
+ * remove lesson - also remove from related students??
+ * add student
+ * remove student
+ * compare/sort
+ */
+

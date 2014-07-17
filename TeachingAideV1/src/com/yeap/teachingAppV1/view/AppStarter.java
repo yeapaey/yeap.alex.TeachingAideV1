@@ -1,9 +1,8 @@
 package com.yeap.teachingAppV1.view;
 
-import java.util.Collection;
-
 import com.yeap.teachingAppV1.model.AbstractLearningClass;
 import com.yeap.teachingAppV1.model.DataEngine;
+import com.yeap.teachingAppV1.model.GroupLearningClass;
 import com.yeap.teachingAppV1.model.IndividualLearningClass;
 import com.yeap.teachingAppV1.model.Student;
 
@@ -15,7 +14,7 @@ public class AppStarter {
 		loadDummyData();
 		printEverything();
 		
-		// testAddStudentToGroup();
+		testAddStudentToGroup();
 		//
 		// testRemoveStudentFromGroup();
 		//
@@ -48,8 +47,8 @@ public class AppStarter {
 				System.out.printf("\n%s. Students:", alc.getName());
 			}
 			
-			Collection<Student> studs = alc.getStudents().values();
-			for (Student s : studs)
+			// Collection<Student> studs = alc.getStudents().values();
+			for (Student s : alc.getStudents())
 			{
 				System.out.printf(" %s %s", s.getFirstName(), s.getSurname());
 			}
@@ -68,21 +67,27 @@ public class AppStarter {
 		engine.addStudent(new Student("Anderson", "Ashleigh", "9C"));
 		engine.addStudent(new Student("Baxter", "Evie", "9A"));
 		engine.addLearningClass(new IndividualLearningClass("Maddy Phelan Class", a));
+		engine.addLearningClass(new GroupLearningClass("Group A"));
 	}
 	
-	// public static void testAddStudentToGroup()
-	// {
-	// StudentGroup a = new StudentGroup("Group Z");
-	// Student b = new Student("Cron", "Annelise", "12A");
-	// Student c = new Student("Svensson", "Rachel", "7C");
-	// engine.addTeachable(a);
-	// engine.addTeachable(b);
-	// engine.addTeachable(c);
-	// engine.addStudentToStudentGroup(a.getId(), b.getId());
-	// engine.addStudentToStudentGroup(a.getId(), c.getId());
-	//
-	// printEverything();
-	// }
+
+	public static void testAddStudentToGroup()
+	{
+		GroupLearningClass a = new GroupLearningClass("Group Z");
+		Student b = new Student("Cron", "Annelise", "12A");
+		Student c = new Student("Svensson", "Rachel", "7C");
+		engine.addLearningClass(a);
+		engine.addStudent(b);
+		engine.addStudent(c);
+		engine.addStudentToLearningClass(a.getId(), b.getId());
+		engine.addStudentToLearningClass(a.getId(), c.getId());
+
+		printEverything();
+
+		engine.addStudentToLearningClass(a.getId(), engine.getAllStudents().first().getId());
+
+		printEverything();
+	}
 	
 	
 	// public static void testRemoveStudentFromGroup()
