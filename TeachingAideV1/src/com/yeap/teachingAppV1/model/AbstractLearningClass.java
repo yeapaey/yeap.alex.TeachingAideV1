@@ -7,7 +7,6 @@ abstract public class AbstractLearningClass implements Lessons, Comparable<Abstr
 
 	private UniqueID id;
 	private String name;
-	// private HashMap<UniqueID, Student> students; // Should be sorted alphabetically
 	private SearchableTreeSet<Lesson> lessons; // Should be sorted by date
 
 
@@ -16,7 +15,6 @@ abstract public class AbstractLearningClass implements Lessons, Comparable<Abstr
 		id = new UniqueID(idPrefix);
 		this.name = name;
 		lessons = new SearchableTreeSet<Lesson>();
-		// students = (individual ? new HashMap<UniqueID, Student>(1) : new HashMap<UniqueID, Student>());
 	}
 
 
@@ -40,14 +38,6 @@ abstract public class AbstractLearningClass implements Lessons, Comparable<Abstr
 	{
 		return lessons.removeByID(lessonID);
 	}
-
-
-	@Override
-	public boolean equals(UniqueID otherID)
-	{
-		return id.equals(otherID);
-	}
-
 
 	public String getName()
 	{
@@ -80,7 +70,28 @@ abstract public class AbstractLearningClass implements Lessons, Comparable<Abstr
 	{
 		return lessons;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return id.toString();
+	}
 
+	
+	@Override
+	public boolean equals(UniqueID otherID)
+	{   
+		try
+		{
+			throw new Exception();
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+		
+		return id.equals(otherID);
+	}
 }
 
 /*

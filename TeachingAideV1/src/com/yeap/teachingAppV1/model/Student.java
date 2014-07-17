@@ -56,10 +56,10 @@ public class Student implements Lessons, Comparable<Student>
 	}
 
 
-	public boolean removeLearningClass(UniqueID learningClassID)
-	{
-		return learningClasses.removeByID(learningClassID);
-	}
+//	public boolean removeLearningClass(UniqueID learningClassID)
+//	{
+//		return learningClasses.removeByID(learningClassID);
+//	}
 	
 
 	@Override

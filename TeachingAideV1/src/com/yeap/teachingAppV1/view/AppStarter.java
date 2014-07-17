@@ -1,5 +1,8 @@
 package com.yeap.teachingAppV1.view;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import com.yeap.teachingAppV1.model.AbstractLearningClass;
 import com.yeap.teachingAppV1.model.DataEngine;
 import com.yeap.teachingAppV1.model.GroupLearningClass;
@@ -15,9 +18,9 @@ public class AppStarter {
 		printEverything();
 		
 		testAddStudentToGroup();
-		//
-		// testRemoveStudentFromGroup();
-		//
+		
+//		testRemoveStudentLearningClass();
+		
 		// testRemoveStudent();
 		//
 		// testAddLesson();
@@ -73,40 +76,66 @@ public class AppStarter {
 
 	public static void testAddStudentToGroup()
 	{
+//		System.out.printf("There are currently %d students and %d learning classes.\n", 
+//							engine.getAllStudents().size(), engine.getAllLearningClasses().size());
 		GroupLearningClass a = new GroupLearningClass("Group Z");
 		Student b = new Student("Cron", "Annelise", "12A");
 		Student c = new Student("Svensson", "Rachel", "7C");
 		engine.addLearningClass(a);
 		engine.addStudent(b);
 		engine.addStudent(c);
+//		try {
+//			Thread.sleep(50);
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 		engine.addStudentToLearningClass(a.getId(), b.getId());
 		engine.addStudentToLearningClass(a.getId(), c.getId());
+//		System.out.printf("There are currently %d students and %d learning classes.\n", 
+//				engine.getAllStudents().size(), engine.getAllLearningClasses().size());
 
+		System.out.println("testAddStudentToLearningclass pt1");
 		printEverything();
 
 		engine.addStudentToLearningClass(a.getId(), engine.getAllStudents().first().getId());
+//		System.out.printf("There are currently %d students and %d learning classes.\n", 
+//				engine.getAllStudents().size(), engine.getAllLearningClasses().size());
 
-		printEverything();
+		System.out.println("testAddStudentToLearningclass pt2");
+//		printEverything();
 	}
 	
 	
-	// public static void testRemoveStudentFromGroup()
-	// {
-	// Iterator<Student> iter = engine.getAllStudents().iterator();
-	// boolean exit = false;
-	//
-	// while (iter.hasNext() && !exit)
-	// {
-	// Student student = iter.next();
-	// if (student.getGroup() != null)
-	// {
-	// engine.removeStudentFromStudentGroup(student.getGroup().getId(), student.getId());
-	// exit = true;
-	// }
-	// }
-	//
-	// printEverything();
-	// }
+	public static void testRemoveStudentLearningClass() 
+	{
+		try 
+		{
+			for (AbstractLearningClass alc : engine.getAllLearningClasses())
+			{
+				alc.getAllStudents().remove(alc.getAllStudents().first());
+			}
+		} 
+		catch (NoSuchElementException nsee) 
+		{
+			nsee.printStackTrace();
+		}
+		
+//		Iterator<Student> iter = engine.getAllStudents().iterator();
+//		boolean exit = false;
+//
+//		while (iter.hasNext() && !exit) {
+//			Student student = iter.next();
+//			if (student.getGroup() != null) {
+//				engine.removeStudentFromStudentGroup(
+//						student.getGroup().getId(), student.getId());
+//				exit = true;
+//			}
+//		}
+
+		System.out.println("testRemoveStudentFromLearningClass");
+		printEverything();
+	}
 	
 	
 	// public static void testRemoveStudent()

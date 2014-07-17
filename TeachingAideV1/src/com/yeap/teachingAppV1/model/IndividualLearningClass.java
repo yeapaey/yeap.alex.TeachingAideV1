@@ -64,5 +64,11 @@ public class IndividualLearningClass extends AbstractLearningClass {
 		return true;
 	}
 
+	@Override
+	public boolean removeLesson(UniqueID lessonID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 
 }

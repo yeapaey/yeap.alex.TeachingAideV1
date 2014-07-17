@@ -1,7 +1,5 @@
 package com.yeap.teachingAppV1.model;
 
-import java.util.Iterator;
-
 import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
 public class DataEngine
@@ -34,34 +32,6 @@ public class DataEngine
 	public boolean removeStudent(UniqueID studID)
 	{
 		return allStudents.removeByID(studID);
-		
-//		Iterator<Student> iter = allStudents.iterator();
-//		Student current;
-//
-//		while (iter.hasNext())
-//		{
-//			current = iter.next();
-//			if (current.getId().equals(studID))
-//			{
-//				// remove references to learning classes
-//				for (AbstractLearningClass alc : current.getLearningClasses())
-//				{
-//					if (alc.getClass() == IndividualLearningClass.class)
-//					{
-//						allStudents.remove(alc);
-//					}
-//					else
-//					{
-//						alc.getAllStudents().remove(studID);
-//					}
-//				}
-//
-//				iter.remove();
-//				return true;
-//			}
-//		}
-//
-//		return false;
 	}
 
 
@@ -74,40 +44,42 @@ public class DataEngine
 	public boolean removeLearningClass(UniqueID learningClassID)
 	{
 		return allLearningClasses.removeByID(learningClassID);
-//		Iterator<AbstractLearningClass> iter = allLearningClasses.iterator();
-//		AbstractLearningClass current;
-//
-//		while (iter.hasNext())
-//		{
-//			current = iter.next();
-//			if (current.equals(learningClassID))
-//			{
-//				current.getAllStudents().remove(learningClassID);
-//			}
-//
-//			return true;
-//		}
-//
-//		return false;
 	}
 
 
 	// returns boolean because it requires finding by ID. If student object was passed, could change to void.
 	public boolean addStudentToLearningClass(UniqueID groupID, UniqueID studentID)
 	{
-//		AbstractLearningClass lc = getLearningClassByID(groupID);
-//		
-//		if (allLearningClasses.getByID(groupID) == null ||
-//			allStudents.getByID(studentID) == null)
-//		{
-//			return false;
-//		}
+//		System.out.printf("G - %s\nS - %s\n", groupID.toString(), studentID.toString());
 		try 
 		{
-			return allLearningClasses.getByID(groupID).addStudent(allStudents.getByID(studentID));
+			AbstractLearningClass alc = allLearningClasses.getByID(groupID);
+			Student s = allStudents.getByID(studentID);
+			if (alc == null)
+				System.out.println("alc returned null!");
+			if(s == null)
+				System.out.println("s returned null!");
+			
+			return alc.addStudent(s);
 		}
 		catch (NullPointerException npe)
 		{
+			npe.printStackTrace();
+//			System.out.println("Null pointer! AddStudentToLearningClass");
+			return false; // May be better to just have the whole method throw a NPE
+		}
+	}
+	
+	
+	public boolean removeStudentFromLearningClass(UniqueID groupID, UniqueID studentID)
+	{
+		try 
+		{
+			return allLearningClasses.getByID(groupID).removeStudent(studentID);
+		}
+		catch (NullPointerException npe)
+		{
+			System.out.println("Null pointer! RemoveStudentFromLearningClass");
 			return false; // May be better to just have the whole method throw a NPE
 		}
 	}
@@ -116,19 +88,6 @@ public class DataEngine
 	public AbstractLearningClass getLearningClassByID(UniqueID learningClassID)
 	{
 		return allLearningClasses.getByID(learningClassID);
-//		Iterator<AbstractLearningClass> iter = allLearningClasses.iterator();
-//		AbstractLearningClass current = null;
-//
-//		while (iter.hasNext())
-//		{
-//			current = iter.next();
-//			if (current.equals(learningClassID))
-//			{
-//				return current;
-//			}
-//		}
-//
-//		return null;
 	}
 
 
@@ -136,19 +95,6 @@ public class DataEngine
 	public Student getStudentByID(UniqueID studentID)
 	{
 		return allStudents.getByID(studentID);
-//		Student current;
-//		Iterator<Student> iter = allStudents.iterator();
-//
-//		while (iter.hasNext())
-//		{
-//			current = iter.next();
-//			if (current.equals(studentID))
-//			{
-//				return current;
-//			}
-//		}
-//
-//		return null;
 	}
 
 

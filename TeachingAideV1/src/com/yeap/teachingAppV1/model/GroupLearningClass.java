@@ -57,4 +57,17 @@ public class GroupLearningClass extends AbstractLearningClass {
 		return false;
 	}
 	
+	@Override
+	public boolean equals(UniqueID otherID)
+	{
+		System.out.println("Equals Called! GLC");
+		return super.equals(otherID);
+	}
+
+	@Override
+	public boolean removeLesson(UniqueID lessonID) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
 }

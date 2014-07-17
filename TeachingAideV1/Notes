@@ -1,4 +1,4 @@
-Test Edit
+current.equals() in SearchableTreeSet not working, goes to object.equals(Object o) instead of the typed version of equals.
 
 Lesson needs to be made comparable.
 Something wrong with the while loop in DataEngine:38 (getTeachable) - DONE
