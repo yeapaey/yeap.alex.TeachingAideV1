@@ -48,7 +48,7 @@ public class AppStarter {
 			}
 			
 			// Collection<Student> studs = alc.getStudents().values();
-			for (Student s : alc.getStudents())
+			for (Student s : alc.getAllStudents())
 			{
 				System.out.printf(" %s %s", s.getFirstName(), s.getSurname());
 			}

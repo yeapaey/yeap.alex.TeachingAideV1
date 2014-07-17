@@ -12,6 +12,15 @@ Something wrong with the while loop in DataEngine:38 (getTeachable) - DONE
 * Consider making a TeachableDelegate and using that to ensure the same functionality between ALC's and Student
 
 
+* Will use a treeset for everything because: 
+	* Ensures no duplicates
+	* Orders for me (using specified comparator)
+	* Iterable
+	* Can retrieve subsets of the set (eg. dates after a given date)
+** Alternate design: 	
+	* Keep things in a master list then use smaller lists or sets for specific ordered collections
+
+
 Alternate design:
 
 * Create students, then have "Individual Class" and "Group Class". 

@@ -1,24 +1,21 @@
 package com.yeap.teachingAppV1.model;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-
 import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
-abstract public class AbstractLearningClass implements Teachable, Comparable<AbstractLearningClass>
+abstract public class AbstractLearningClass implements Lessons, Comparable<AbstractLearningClass>
 {
 
 	private UniqueID id;
 	private String name;
 	// private HashMap<UniqueID, Student> students; // Should be sorted alphabetically
-	private LinkedList<Lesson> lessons; // Should be sorted by date
+	private SearchableTreeSet<Lesson> lessons; // Should be sorted by date
 
 
 	public AbstractLearningClass(String idPrefix, String name, boolean individual)
 	{
 		id = new UniqueID(idPrefix);
 		this.name = name;
-		lessons = new LinkedList<Lesson>();
+		lessons = new SearchableTreeSet<Lesson>();
 		// students = (individual ? new HashMap<UniqueID, Student>(1) : new HashMap<UniqueID, Student>());
 	}
 
@@ -31,35 +28,9 @@ abstract public class AbstractLearningClass implements Teachable, Comparable<Abs
 
 	// Need to implement sorting here
 	@Override
-	public void addLesson(Lesson newLesson)
+	public boolean addLesson(Lesson newLesson)
 	{
-		Iterator<Lesson> iter = lessons.iterator();
-		Lesson current = null;
-		boolean inserted = false;
-
-		newLesson.addLearningClass(this); // Very Important line!
-
-		if (lessons.isEmpty())
-		{
-			lessons.add(newLesson);
-		}
-		else
-		{
-			while (iter.hasNext() && !inserted)
-			{
-				current = iter.next();
-				if (newLesson.getDate().compareTo(current.getDate()) <= 0)
-				{
-					lessons.add(lessons.indexOf(current), newLesson); // This is (seemingly) not elegant
-					inserted = false;
-				}
-			}
-
-			if (!inserted)
-			{
-				lessons.addLast(newLesson);
-			}
-		}
+		return lessons.add(newLesson);
 	}
 
 
@@ -67,20 +38,7 @@ abstract public class AbstractLearningClass implements Teachable, Comparable<Abs
 	@Override
 	public boolean removeLesson(UniqueID lessonID)
 	{
-		Iterator<Lesson> iter = lessons.iterator();
-		Lesson current = null;
-
-		while (iter.hasNext())
-		{
-			current = iter.next();
-			if (current.getId().equals(lessonID))
-			{
-				iter.remove();
-				return true;
-			}
-		}
-
-		return false;
+		return lessons.removeByID(lessonID);
 	}
 
 
@@ -109,16 +67,16 @@ abstract public class AbstractLearningClass implements Teachable, Comparable<Abs
 	}
 
 
-	abstract public LinkedList<Student> getStudents();
+	abstract public SearchableTreeSet<Student> getAllStudents();
 	
 
-	abstract public void addStudent(Student student);
+	abstract public boolean addStudent(Student student);
 	
 
 	abstract public boolean removeStudent(UniqueID studentID);
 	
 
-	public LinkedList<Lesson> getLessons()
+	public SearchableTreeSet<Lesson> getAllLessons()
 	{
 		return lessons;
 	}

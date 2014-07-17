@@ -1,6 +1,8 @@
-package com.yeap.teachingAppV1.model;
+package com.yeap.teachingAppV1.model.comparators;
 
 import java.util.Comparator;
+
+import com.yeap.teachingAppV1.model.Student;
 
 public class StudentCompareAlphabetically implements Comparator<Student>
 {

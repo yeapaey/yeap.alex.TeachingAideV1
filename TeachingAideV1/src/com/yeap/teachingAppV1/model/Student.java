@@ -1,11 +1,8 @@
 package com.yeap.teachingAppV1.model;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-
 import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
-public class Student implements Teachable, Comparable<Student>
+public class Student implements Lessons, Comparable<Student>
 {
 	
 	private static final String idPrefix = new String("STU");
@@ -19,8 +16,8 @@ public class Student implements Teachable, Comparable<Student>
 	private String motherPhone;
 	private String fatherPhone;
 	private String email;
-	private LinkedList<AbstractLearningClass> learningClasses;
-	private LinkedList<Lesson> lessons;
+	private SearchableTreeSet<AbstractLearningClass> learningClasses;
+	private SearchableTreeSet<Lesson> lessons;
 
 	
 	public Student(String surname, String firstName, String className)
@@ -35,45 +32,33 @@ public class Student implements Teachable, Comparable<Student>
 		motherPhone = new String();
 		fatherPhone = new String();
 		email = new String();
-		lessons = new LinkedList<Lesson>();
-		learningClasses = new LinkedList<AbstractLearningClass>();
+		lessons = new SearchableTreeSet<Lesson>();
+		learningClasses = new SearchableTreeSet<AbstractLearningClass>();
 	}
 
 	
 	@Override
-	public void addLesson(Lesson newLesson) {
-		lessons.add(newLesson);
-		
+	public boolean addLesson(Lesson newLesson) {
+		return lessons.add(newLesson);
 	}
 
 	@Override
 	public boolean removeLesson(UniqueID lessonID)
 	{
-		// TODO Auto-generated method stub
+		
 		return false;
 	}
 	
 	
-	public void addLearningClass(AbstractLearningClass newLearningClass)
+	public boolean addLearningClass(AbstractLearningClass newLearningClass)
 	{
-		learningClasses.addFirst(newLearningClass);
+		return learningClasses.add(newLearningClass);
 	}
 
 
 	public boolean removeLearningClass(UniqueID learningClassID)
 	{
-		Iterator<AbstractLearningClass> iter = learningClasses.iterator();
-
-		while (iter.hasNext())
-		{
-			if (iter.next().getId().equals(learningClassID))
-			{
-				iter.remove();
-				return true;
-			}
-		}
-
-		return false;
+		return learningClasses.removeByID(learningClassID);
 	}
 	
 
@@ -85,9 +70,8 @@ public class Student implements Teachable, Comparable<Student>
 
 	
 	@Override
-	public LinkedList<Lesson> getLessons()
+	public SearchableTreeSet<Lesson> getAllLessons()
 	{
-		// TODO Auto-generated method stub
 		return lessons;
 	}
 
@@ -171,7 +155,7 @@ public class Student implements Teachable, Comparable<Student>
 	}
 
 
-	public LinkedList<AbstractLearningClass> getLearningClasses()
+	public SearchableTreeSet<AbstractLearningClass> getLearningClasses()
 	{
 		return learningClasses;
 	}

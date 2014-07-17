@@ -1,7 +1,5 @@
 package com.yeap.teachingAppV1.model;
 
-import java.util.LinkedList;
-
 import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
 public class IndividualLearningClass extends AbstractLearningClass {
@@ -28,7 +26,7 @@ public class IndividualLearningClass extends AbstractLearningClass {
 
 
 	@Override
-	public LinkedList<Student> getStudents()
+	public SearchableTreeSet<Student> getAllStudents()
 	{
 		if (student == null)
 		{
@@ -36,7 +34,7 @@ public class IndividualLearningClass extends AbstractLearningClass {
 		}
 		else
 		{
-			LinkedList<Student> wrapper = new LinkedList<Student>();
+			SearchableTreeSet<Student> wrapper = new SearchableTreeSet<Student>();
 			wrapper.add(student);
 
 			return wrapper;
@@ -45,13 +43,15 @@ public class IndividualLearningClass extends AbstractLearningClass {
 
 
 	@Override
-	public void addStudent(Student student)
+	public boolean addStudent(Student student)
 	{
 		if (student == null)
 		{
 			this.student = student;
+			return true;
 		}
 
+		return false;
 		// else throw some sort of exception to indicate it can't be changed
 
 	}

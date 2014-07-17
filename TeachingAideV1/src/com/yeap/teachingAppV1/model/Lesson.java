@@ -1,7 +1,6 @@
 package com.yeap.teachingAppV1.model;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import com.yeap.teachingAppV1.model.uniqueID.UniqueID;
 
@@ -13,7 +12,7 @@ public class Lesson {
 	private String plan;
 	private String notes;
 	private boolean absent;
-	private HashMap<UniqueID, AbstractLearningClass> owners;
+	private SearchableTreeSet<AbstractLearningClass> owners; // Most of the time this doesn't need to be sorted...
 //	private int lessonNo;
 	
 	
@@ -27,9 +26,9 @@ public class Lesson {
 	}
 
 
-	public void addLearningClass(AbstractLearningClass newOwner)
+	public boolean addLearningClass(AbstractLearningClass newOwner)
 	{
-		owners.put(newOwner.getId(), newOwner);
+		return owners.add(newOwner);
 	}
 
 	public Date getDate() {
