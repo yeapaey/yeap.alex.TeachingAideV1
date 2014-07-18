@@ -1,3 +1,4 @@
+Test
 current.equals() in SearchableTreeSet not working, goes to object.equals(Object o) instead of the typed version of equals.
 
 Lesson needs to be made comparable.
